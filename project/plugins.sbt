@@ -6,4 +6,3 @@ resolvers += "Typesafe repository" at "https://repo.typesafe.com/typesafe/releas
 
 // Add sbt plugins
 addSbtPlugin("com.github.sbt" % "sbt-ci-release" % "1.11.2")
-addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.12.2")
