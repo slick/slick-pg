@@ -1,5 +1,3 @@
-import xerial.sbt.Sonatype.sonatypeCentralHost
-
 val scala212 = "2.12.21"
 val scala213 = "2.13.18"
 val scala3 = "3.8.3"
@@ -25,13 +23,9 @@ lazy val commonSettings = Seq(
   javaOptions ++= Seq("-XX:MaxMetaspaceSize=512m"),
 
   resolvers += Resolver.mavenLocal,
-  resolvers ++= Resolver.sonatypeOssRepos("snapshots"),
+  resolvers += Resolver.sonatypeCentralSnapshots,
   resolvers += "Typesafe repository" at "https://repo.typesafe.com/typesafe/releases/",
 
-  //    publishTo := Some(Resolver.file("file",  new File(Path.userHome.absolutePath+"/.m2/repository"))),
-  publishTo := sonatypePublishToBundle.value,
-  sonatypeCredentialHost := sonatypeCentralHost,
-  sonatypeProfileName := "com.typesafe.slick",
   publishMavenStyle := true,
   (Test / publishArtifact) := false,
   pomIncludeRepository := { _ => false },
@@ -39,26 +33,16 @@ lazy val commonSettings = Seq(
     configurations = Vector(Compile, Runtime, Optional)
   ),
 
-  pomExtra :=
-    <url>https://github.com/slick/slick-pg</url>
-    <licenses>
-      <license>
-        <name>BSD-style</name>
-        <url>http://www.opensource.org/licenses/bsd-license.php</url>
-        <distribution>repo</distribution>
-      </license>
-    </licenses>
-    <scm>
-      <url>git@github.com:slick/slick-pg.git</url>
-      <connection>scm:git:git@github.com:slick/slick-pg.git</connection>
-    </scm>
-    <developers>
-      <developer>
-        <id>tminglei</id>
-        <name>Minglei Tu</name>
-        <timezone>+8</timezone>
-      </developer>
-    </developers>
+  homepage := Some(url("https://github.com/slick/slick-pg")),
+  scmInfo := Some(ScmInfo(
+    url("https://github.com/slick/slick-pg"),
+    "scm:git:https://github.com/slick/slick-pg.git",
+    Some("scm:git:git@github.com:slick/slick-pg.git")
+  )),
+  licenses := Seq("BSD-style" -> url("http://www.opensource.org/licenses/bsd-license.php")),
+  developers := List(
+    Developer("tminglei", "Minglei Tu", "", url("https://github.com/tminglei"))
+  )
 
 )
 
