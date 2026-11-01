@@ -52,8 +52,8 @@ def mainDependencies(scalaVersion: String) = {
   Seq (
     "org.scala-lang.modules" %% "scala-parser-combinators" % (if (isScala3) "2.3.0" else "1.1.2"),
     "dev.zio" %% "izumi-reflect" % "3.0.9",
-    "com.typesafe.slick" %% "slick" % "4.0.0-RC1",
-    "com.typesafe.slick" %% "slick-future" % "4.0.0-RC1",
+    "com.typesafe.slick" %% "slick" % "4.0.0-RC2",
+    "com.typesafe.slick" %% "slick-future" % "4.0.0-RC2",
     "org.typelevel" %% "cats-effect" % "3.6.1",
     "co.fs2" %% "fs2-core" % "3.12.0",
     "org.postgresql" % "postgresql" % "42.7.13",
