@@ -21,6 +21,22 @@ class SimpleArrayUtilsSuite extends AnyFunSuite {
     assert(v5 === Some(Seq(")suffix")))
   }
 
+  // Each key is how Postgres prints a one-element text[] holding the value, e.g. SELECT ARRAY['(']::text
+  Seq(
+    """{"\""}"""     -> "\"",
+    """{"\\"}"""     -> "\\",
+    """{"\\\""}"""   -> "\\\"",
+    """{"\"\""}"""   -> "\"\"",
+    """{"{\""}"""    -> "{\"",
+    """{"{\"}"}"""   -> "{\"}",
+    """{(}"""        -> "(",
+    """{[a}"""       -> "[a"
+  ).foreach { case (arrayText, element) =>
+    test(s"fromString reads $arrayText") {
+      assert(SimpleArrayUtils.fromString(identity)(arrayText) === Some(Seq(element)))
+    }
+  }
+
   test("mkString & fromString") {
     val input = List("Test \\n")
     val str = SimpleArrayUtils.mkString[String](identity)(input)
